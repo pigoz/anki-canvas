@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
     "allowJs": true,
     "checkJs": true,
     "sourceMap": true,
     "preserveConstEnums": true,
-    "lib": ["es2017"],
     "typeRoots": ["./typings", "./node_modules/@types/"],
+    "lib": ["dom", "es2015", "es2015.collection"],
+    "importHelpers": true,
+    "strict": true,
+    "moduleResolution": "node",
 
     "strict": true,
     "noImplicitAny": true,
