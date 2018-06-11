@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "allowJs": true,
+    "checkJs": true,
+    "sourceMap": true,
+    "preserveConstEnums": true,
+    "lib": ["es2017"],
+    "typeRoots": ["./typings", "./node_modules/@types/"],
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "exclude": ["node_modules"]
+}
