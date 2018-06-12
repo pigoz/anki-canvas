@@ -1,13 +1,19 @@
 {
   "name": "anki-canvas",
   "version": "0.0.1",
-  "description": "JavaScript widget providing touch enabled canvas for drawing",
+  "description": "JavaScript widget providing touch enabled canvas for drawing in AnkiDroid",
   "main": "index.js",
   "repository": "https://github.com/pigoz/anki-canvas",
   "author": "pigoz",
   "license": "MIT",
   "dependencies": {
-    "fp-ts": "^1.6.2"
+    "@types/react": "^16.3.17",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.2",
+    "fp-ts": "^1.6.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
@@ -26,9 +32,9 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
-    "dev": "parcel watch src/index.html"
+    "start": "parcel src/*.html",
+    "build": "parcel build src/*.html",
+    "dev": "parcel watch src/*.html"
   },
   "jest": {
     "globals": {
