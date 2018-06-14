@@ -3,7 +3,7 @@ import { HDPI_FACTOR } from './constants';
 
 const DEFAULT_CONFIG = {
   color: '#000',
-  lineWidth: 10,
+  lineWidth: 18,
 };
 
 type Config = Partial<typeof DEFAULT_CONFIG>;

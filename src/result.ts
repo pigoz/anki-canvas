@@ -19,6 +19,6 @@ redraw(
   canvas,
   load().map(l => l.map(z => ({ x: z.x * RATIO, y: z.y * RATIO }))),
   {
-    lineWidth: 3,
+    lineWidth: 9,
   },
 );
