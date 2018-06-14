@@ -50,6 +50,10 @@ export const save = (x: Array<Point[]>) => {
   store.setItem('state', JSON.stringify(x));
 };
 
+function emptyarray(xs: Array<any>) {
+  xs.splice(0, xs.length);
+}
+
 export const clear = (canvas: HTMLCanvasElement) => {
   const ctx = canvas.getContext('2d');
 
@@ -99,10 +103,10 @@ export const handleEnd = (canvas: HTMLCanvasElement, state: Array<Point[]>) => (
   line(canvas, ongoing[ongoing.length - 1], touch, DEFAULT_CONFIG);
   state.push(JSON.parse(JSON.stringify(ongoing)));
   save(state);
-  ongoing.splice(0, ongoing.length); // empty the array
+  emptyarray(ongoing);
 };
 
 export const handleCancel = () => (evt: TouchEvent) => {
   evt.preventDefault();
-  ongoing.splice(0, ongoing.length); // remove it; we're done
+  emptyarray(ongoing);
 };
