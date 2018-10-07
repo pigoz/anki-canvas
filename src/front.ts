@@ -4,16 +4,14 @@ import * as styles from './styles';
 import { CANVAS_SIZE } from './constants';
 import * as icons from './icons';
 
+import { handleAdd, handleUndo, handleClear, save, empty } from './app';
 import {
   handleStart,
   handleMove,
   handleEnd,
   handleCancel,
-  handleUndo,
-  handleClear,
-  save,
-  empty,
-} from './app';
+  redraw,
+} from './draw';
 
 const h = hs.context();
 
@@ -33,10 +31,10 @@ render('ac-front', T);
 const state = empty();
 save(state); // reset saved state on reinit
 
-undo.addEventListener('touchstart', handleUndo(canvas, state), false);
-clear.addEventListener('touchstart', handleClear(canvas, state), false);
+undo.addEventListener('touchstart', redraw(canvas)(handleUndo(state)), false);
+clear.addEventListener('touchstart', redraw(canvas)(handleClear(state)), false);
 canvas.addEventListener('touchstart', handleStart(canvas), false);
-canvas.addEventListener('touchend', handleEnd(canvas, state), false);
+canvas.addEventListener('touchend', handleEnd(canvas, handleAdd(state)), false);
 canvas.addEventListener('touchcancel', handleCancel(), false);
 canvas.addEventListener('touchmove', handleMove(canvas), false);
 canvas.addEventListener('click', e => e.preventDefault(), false);
