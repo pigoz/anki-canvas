@@ -18,5 +18,5 @@ render('ac-back', canvas);
 
 const scaledstate = map(load(), z => ({ x: z.x * RATIO, y: z.y * RATIO }));
 const scaledconfig = { lineWidth: DEFAULT_CONFIG.lineWidth * RATIO };
-const redrawer = redraw(canvas, scaledconfig)(iterator(scaledstate));
+const redrawer = redraw(canvas, scaledconfig)(() => iterator(scaledstate));
 redrawer();

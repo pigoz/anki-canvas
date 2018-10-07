@@ -1,5 +1,5 @@
 import * as hs from 'hyperscript';
-import { html, render } from './dom';
+import { render } from './dom';
 import * as styles from './styles';
 import { CANVAS_SIZE } from './constants';
 import * as icons from './icons';
@@ -21,8 +21,11 @@ const canvas = h('canvas', {
   height: CANVAS_SIZE,
 });
 
-const undo = h('button', { style: styles.action }, html(icons.undo));
-const clear = h('button', { style: styles.action }, html(icons.clear));
+const undo = h('button', { style: styles.action });
+undo.innerHTML = icons.undo;
+const clear = h('button', { style: styles.action });
+clear.innerHTML = icons.clear;
+
 const actions = h('div', { style: styles.actions }, [clear, undo]);
 const T = h('div', { style: styles.wrapper }, [canvas, actions]);
 
