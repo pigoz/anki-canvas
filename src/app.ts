@@ -5,7 +5,8 @@ type Point = {
   y: number;
 };
 
-export type State = Array<Point[]>;
+type Priv = Array<Point[]>;
+type State = Priv & { _T: 'State' };
 
 export const DEFAULT_CONFIG = {
   color: '#000',
@@ -39,7 +40,7 @@ function line(
   ctx.stroke();
 }
 
-function model(canvas: HTMLCanvasElement, touch: any) {
+function model(canvas: HTMLCanvasElement, touch: any): Point {
   return {
     x: (touch.pageX - canvas.offsetLeft) * HDPI_FACTOR,
     y: (touch.pageY - canvas.offsetTop) * HDPI_FACTOR,
@@ -48,15 +49,17 @@ function model(canvas: HTMLCanvasElement, touch: any) {
 
 const store = window.localStorage || window.sessionStorage;
 
-export const load = (): Array<Point[]> =>
-  JSON.parse(store.getItem('state') || '[]');
+export const load = (): State => JSON.parse(store.getItem('state') || '[]');
 
-export const save = (x: Array<Point[]>) => {
-  console.log('saved state', x);
+export const save = (x: State): void => {
   store.setItem('state', JSON.stringify(x));
 };
 
-function emptyarray(xs: Array<any>) {
+export const empty = (): State => JSON.parse('[]');
+
+const cast = (x: Priv): State => x as State;
+
+function emptyarray<T>(xs: Array<T>) {
   xs.splice(0, xs.length);
 }
 
@@ -70,9 +73,12 @@ export const clear = (canvas: HTMLCanvasElement) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
+export const map = (state: State, cb: (p: Point) => Point): State =>
+  cast(state.map(l => l.map(z => cb(z))));
+
 export const redraw = (
   canvas: HTMLCanvasElement,
-  state: Array<Point[]>,
+  state: State,
   config: Config = {},
 ) => {
   clear(canvas);
@@ -99,7 +105,7 @@ export const handleMove = (canvas: HTMLCanvasElement) => (evt: TouchEvent) => {
   ongoing.push(touch);
 };
 
-export const handleEnd = (canvas: HTMLCanvasElement, state: Array<Point[]>) => (
+export const handleEnd = (canvas: HTMLCanvasElement, state: State) => (
   evt: TouchEvent,
 ) => {
   evt.preventDefault();
@@ -117,18 +123,12 @@ export const handleCancel = () => (evt: TouchEvent) => {
   emptyarray(ongoing);
 };
 
-export const handleUndo = (
-  canvas: HTMLCanvasElement,
-  state: Array<Point[]>,
-) => () => {
+export const handleUndo = (canvas: HTMLCanvasElement, state: State) => () => {
   state.splice(-1, 1);
   redraw(canvas, state);
 };
 
-export const handleClear = (
-  canvas: HTMLCanvasElement,
-  state: Array<Point[]>,
-) => () => {
+export const handleClear = (canvas: HTMLCanvasElement, state: State) => () => {
   state.splice(0, state.length);
   redraw(canvas, state);
 };

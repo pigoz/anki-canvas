@@ -1,6 +1,6 @@
 import * as hs from 'hyperscript';
 import * as styles from './styles';
-import { redraw, load, DEFAULT_CONFIG } from './app';
+import { map, redraw, load, DEFAULT_CONFIG } from './app';
 import { render } from './dom';
 import { CANVAS_SIZE, RESULT_SIZE } from './constants';
 
@@ -15,10 +15,6 @@ const canvas = h('canvas', {
 
 render('ac-back', canvas);
 
-redraw(
-  canvas,
-  load().map(l => l.map(z => ({ x: z.x * RATIO, y: z.y * RATIO }))),
-  {
-    lineWidth: DEFAULT_CONFIG.lineWidth * RATIO,
-  },
-);
+redraw(canvas, map(load(), z => ({ x: z.x * RATIO, y: z.y * RATIO })), {
+  lineWidth: DEFAULT_CONFIG.lineWidth * RATIO,
+});

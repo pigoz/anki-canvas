@@ -12,7 +12,7 @@ import {
   handleUndo,
   handleClear,
   save,
-  State,
+  empty,
 } from './app';
 
 const h = hs.context();
@@ -30,8 +30,8 @@ const T = h('div', {}, [canvas, actions]);
 
 render('ac-front', T);
 
-save([]); // reset saved state on reinit
-const state: State = [];
+const state = empty();
+save(state); // reset saved state on reinit
 
 undo.addEventListener('touchstart', handleUndo(canvas, state), false);
 clear.addEventListener('touchstart', handleClear(canvas, state), false);
