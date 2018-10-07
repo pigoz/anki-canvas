@@ -34,6 +34,6 @@ Anki for desktop and an Ankiweb account. Follow these steps:
 ### Screenshots
 
 <p align="center">
-  <img src="https://0x0.st/sfK-.png" width="200" title="whiteboard.js">
-  <img src="https://0x0.st/sfKH.png" width="200" title="result.js">
+  <img src="https://0x0.st/sgTa.png" width="200" title="whiteboard.js">
+  <img src="https://0x0.st/sgTB.png" width="200" title="result.js">
 </p>
