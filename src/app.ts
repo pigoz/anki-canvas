@@ -92,9 +92,11 @@ export const handleCancel = () => (evt: TouchEvent) => {
 export const handleUndo = (canvas: HTMLCanvasElement, state: State) => () => {
   state.splice(-1, 1);
   redraw(canvas, state);
+  save(state);
 };
 
 export const handleClear = (canvas: HTMLCanvasElement, state: State) => () => {
   state.splice(0, state.length);
   redraw(canvas, state);
+  save(state);
 };
