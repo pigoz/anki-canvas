@@ -24,7 +24,7 @@ const canvas = h('canvas', {
 const undo = h('button', { style: styles.action }, html(icons.undo));
 const clear = h('button', { style: styles.action }, html(icons.clear));
 const actions = h('div', { style: styles.actions }, [clear, undo]);
-const T = h('div', {}, [canvas, actions]);
+const T = h('div', { style: styles.wrapper }, [canvas, actions]);
 
 render('ac-front', T);
 
