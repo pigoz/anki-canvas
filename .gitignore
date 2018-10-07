@@ -1,6 +1,8 @@
 /node_modules
 /dist
 /.cache
+/scripts/release/*.js
+/scripts/release.zip
 *.log
 *.js.map
 *.js

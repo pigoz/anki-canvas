@@ -30,7 +30,8 @@
     "test": "jest",
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html",
-    "dist": "yarn build && yarn ts-node scripts/dist.ts"
+    "dist": "yarn build && yarn ts-node scripts/dist.ts",
+    "release": "rm -r dist && yarn build && yarn ts-node scripts/release.ts"
   },
   "jest": {
     "globals": {
