@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as os from 'os';
 
 function dist(s: string): string {
-  return path.resolve(__dirname, path.join('./dist', s));
+  return path.resolve(__dirname, path.join('../dist', s));
 }
 
 const m: { [k: string]: string } = JSON.parse(
@@ -17,9 +17,7 @@ const anki = path.join(
   '/Library/Application Support/Anki2/User 1/collection.media',
 );
 
-const files = ['whiteboard', 'result'];
-
-files.forEach(f => {
+['whiteboard', 'result'].forEach(f => {
   const src = dist(m[`${f}.ts`]);
   const dst = path.join(anki, `_${f}.js`);
   console.log(`${src} -> ${dst}`);

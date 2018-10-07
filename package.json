@@ -30,7 +30,7 @@
     "test": "jest",
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html",
-    "anki": "yarn build && yarn ts-node toanki.ts"
+    "dist": "yarn build && yarn ts-node scripts/dist.ts"
   },
   "jest": {
     "globals": {
