@@ -31,8 +31,8 @@ render('ac-front', T);
 const state = empty();
 save(state); // reset saved state on reinit
 
-undo.addEventListener('touchstart', redraw(canvas)(handleUndo(state)), false);
-clear.addEventListener('touchstart', redraw(canvas)(handleClear(state)), false);
+undo.addEventListener('click', redraw(canvas)(handleUndo(state)), false);
+clear.addEventListener('click', redraw(canvas)(handleClear(state)), false);
 canvas.addEventListener('touchstart', handleStart(canvas), false);
 canvas.addEventListener('touchend', handleEnd(canvas, handleAdd(state)), false);
 canvas.addEventListener('touchcancel', handleCancel(), false);

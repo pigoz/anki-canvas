@@ -89,10 +89,10 @@ const clear = (canvas: HTMLCanvasElement) => {
 };
 
 export const redraw = (canvas: HTMLCanvasElement, config: DrawConfig = {}) => (
-  iterator: (cb: (p: Point[]) => void) => void,
+  iterator: () => (cb: (p: Point[]) => void) => void,
 ) => () => {
   clear(canvas);
-  iterator(points => {
+  iterator()(points => {
     for (let i = 1; i < points.length; i++) {
       line(canvas, points[i - 1], points[i], config);
     }

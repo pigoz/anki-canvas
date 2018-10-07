@@ -30,13 +30,13 @@ export const handleAdd = (state: State) => (l: Point[]) => {
   save(state);
 };
 
-export const handleUndo = (state: State) => {
+export const handleUndo = (state: State) => () => {
   state.splice(-1, 1);
   save(state);
   return iterator(state);
 };
 
-export const handleClear = (state: State) => {
+export const handleClear = (state: State) => () => {
   state.splice(0, state.length);
   save(state);
   return iterator(state);
