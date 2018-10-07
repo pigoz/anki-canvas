@@ -1,27 +1,23 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "allowJs": true,
-    "checkJs": true,
-    "sourceMap": true,
     "preserveConstEnums": true,
     "typeRoots": ["./typings", "./node_modules/@types/"],
-    "lib": ["dom", "es2015", "es2015.collection"],
-    "importHelpers": true,
+    "lib": ["es5", "es6", "dom"],
     "strict": true,
+    "module": "commonjs",
     "moduleResolution": "node",
 
     "strict": true,
-    "noImplicitAny": true,
     "strictNullChecks": true,
-    "removeComments": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noImplicitThis": true,
-    "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": ["node_modules"]
 }
