@@ -20,7 +20,7 @@ Anki for desktop and an Ankiweb account. Follow these steps:
 
 - Go on your computer with desktop Anki
 - Grab the release from the [Releases page](https://github.com/pigoz/anki-canvas/releases/latest), and unzip it
-- Add `_front.js` and `_back.ts` to your Anki's `collection.media` folder. This
+- Add `_front.js` and `_back.js` to your Anki's `collection.media` folder. This
   is located in different places depending on platform, but you can easily
   locate it by opening Anki's preferences, going to the `Backups` tab and
   clicking on the `Open backup folder` link. `collection.media` is located in
