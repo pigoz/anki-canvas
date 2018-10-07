@@ -7,7 +7,7 @@ type Point = {
 
 export type State = Array<Point[]>;
 
-const DEFAULT_CONFIG = {
+export const DEFAULT_CONFIG = {
   color: '#000',
   lineWidth: 18,
 };
