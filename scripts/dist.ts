@@ -17,7 +17,7 @@ const anki = path.join(
   '/Library/Application Support/Anki2/User 1/collection.media',
 );
 
-['whiteboard', 'result'].forEach(f => {
+['front', 'back'].forEach(f => {
   const src = dist(m[`${f}.ts`]);
   const dst = path.join(anki, `_${f}.js`);
   console.log(`${src} -> ${dst}`);
