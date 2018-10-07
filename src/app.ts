@@ -1,5 +1,11 @@
-import { Point } from './whiteboard';
 import { HDPI_FACTOR } from './constants';
+
+type Point = {
+  x: number;
+  y: number;
+};
+
+export type State = Array<Point[]>;
 
 const DEFAULT_CONFIG = {
   color: '#000',
@@ -109,4 +115,20 @@ export const handleEnd = (canvas: HTMLCanvasElement, state: Array<Point[]>) => (
 export const handleCancel = () => (evt: TouchEvent) => {
   evt.preventDefault();
   emptyarray(ongoing);
+};
+
+export const handleUndo = (
+  canvas: HTMLCanvasElement,
+  state: Array<Point[]>,
+) => () => {
+  state.splice(-1, 1);
+  redraw(canvas, state);
+};
+
+export const handleClear = (
+  canvas: HTMLCanvasElement,
+  state: Array<Point[]>,
+) => () => {
+  state.splice(0, state.length);
+  redraw(canvas, state);
 };

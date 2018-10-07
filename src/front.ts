@@ -1,16 +1,19 @@
 import * as hs from 'hyperscript';
-import { render } from './dom';
+import { html, render } from './dom';
 import * as styles from './styles';
 import { CANVAS_SIZE } from './constants';
+import * as icons from './icons';
 
 import {
   handleStart,
   handleMove,
   handleEnd,
   handleCancel,
-  redraw,
+  handleUndo,
+  handleClear,
   save,
-} from './touch';
+  State,
+} from './app';
 
 const h = hs.context();
 
@@ -20,26 +23,18 @@ const canvas = h('canvas', {
   height: CANVAS_SIZE,
 });
 
-const undoButton = h('button', { style: styles.action }, '❌');
-const actions = h('div', { style: styles.actions }, undoButton);
+const undo = h('button', { style: styles.action }, html(icons.undo));
+const clear = h('button', { style: styles.action }, html(icons.clear));
+const actions = h('div', { style: styles.actions }, [clear, undo]);
 const T = h('div', {}, [canvas, actions]);
 
-render('whiteboard', T);
-
-export type Point = {
-  x: number;
-  y: number;
-};
+render('ac-front', T);
 
 save([]); // reset saved state on reinit
-const state: Array<Point[]> = [];
+const state: State = [];
 
-function handleUndo() {
-  state.splice(-1, 1);
-  redraw(canvas, state);
-}
-
-undoButton.addEventListener('touchstart', handleUndo, false);
+undo.addEventListener('touchstart', handleUndo(canvas, state), false);
+clear.addEventListener('touchstart', handleClear(canvas, state), false);
 canvas.addEventListener('touchstart', handleStart(canvas), false);
 canvas.addEventListener('touchend', handleEnd(canvas, state), false);
 canvas.addEventListener('touchcancel', handleCancel(), false);

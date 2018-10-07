@@ -1,6 +1,6 @@
 import * as hs from 'hyperscript';
 import * as styles from './styles';
-import { redraw, load } from './touch';
+import { redraw, load } from './app';
 import { render } from './dom';
 import { CANVAS_SIZE, RESULT_SIZE } from './constants';
 
@@ -13,7 +13,7 @@ const canvas = h('canvas', {
   height: RESULT_SIZE,
 });
 
-render('result', canvas);
+render('ac-back', canvas);
 
 redraw(
   canvas,
