@@ -10,7 +10,7 @@ Remembering the Kanji, etc).
 It's composed of two JavaScript files:
  - `front.js` can be included in the front card layout. It generates a touch
    based canvas that allows the user to draw into it.
- - `back.js` can be included in the front card layout. It displays a
+ - `back.js` can be included in the back card layout. It displays a
    smaller readonly version of what was drawn by the user in the front card.
 
 ### How to use
