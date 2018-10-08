@@ -4,7 +4,7 @@
     "allowJs": true,
     "preserveConstEnums": true,
     "typeRoots": ["./typings", "./node_modules/@types/"],
-    "lib": ["es5", "es6", "dom"],
+    "lib": ["es5", "es6", "es2017", "dom"],
     "strict": true,
     "module": "commonjs",
     "moduleResolution": "node",

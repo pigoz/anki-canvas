@@ -1,43 +1,84 @@
+import { Newtype, _iso } from './newtype';
+
 export type Point = {
-  x: number;
-  y: number;
+  readonly x: number;
+  readonly y: number;
 };
 
-type Priv = Array<Point[]>;
-type State = Priv & { _T: 'State' };
-
-const store = window.localStorage || window.sessionStorage;
-
-export const load = (): State => JSON.parse(store.getItem('state') || '[]');
-
-export const save = (x: State): void => {
-  store.setItem('state', JSON.stringify(x));
+type S = {
+  lines: Array<Point[]>;
+  drawing: Point[];
+  dirty: boolean;
 };
 
-export const empty = (): State => JSON.parse('[]');
+export interface State extends Newtype<{ readonly State: unique symbol }, S> {}
 
-const cast = (x: Priv): State => x as State;
+const iso = _iso<State>();
+const db = window.localStorage || window.sessionStorage;
+const dump = JSON.stringify;
+const parse = JSON.parse;
 
-export const map = (state: State, cb: (p: Point) => Point): State =>
-  cast(state.map(l => l.map(z => cb(z))));
+function save(x: S): void {
+  db.setItem('state', dump(x));
+}
 
-export const iterator = (state: State) => (cb: (p: Point[]) => void): void => {
-  state.forEach(cb);
-};
+export function load(): State {
+  const item = db.getItem('state');
+  return item ? iso.wrap({ ...parse(item), dirty: true }) : empty();
+}
 
-export const handleAdd = (state: State) => (l: Point[]) => {
-  state.push(l);
+export function empty(): State {
+  const result: S = {
+    lines: [],
+    drawing: [],
+    dirty: true,
+  };
+
+  save(result);
+  return iso.wrap(result);
+}
+
+export function map(s: State, cb: (x: Point) => Point): State {
+  const state = iso.unwrap(s);
+  const dup: S = parse(dump(state));
+  dup.lines = dup.lines.map(l => l.map(cb));
+  return iso.wrap(dup);
+}
+
+export function undo(s: State): void {
+  const state = iso.unwrap(s);
+  state.lines.splice(-1, 1);
+  state.dirty = true;
   save(state);
-};
+}
 
-export const handleUndo = (state: State) => () => {
-  state.splice(-1, 1);
+export function clear(s: State): void {
+  const state = iso.unwrap(s);
+  state.lines.splice(0, state.lines.length);
+  state.dirty = true;
   save(state);
-  return iterator(state);
-};
+}
 
-export const handleClear = (state: State) => () => {
-  state.splice(0, state.length);
+export function addDrawingPoint(s: State, p: Point): void {
+  const state = iso.unwrap(s);
+  state.drawing.push(p);
+  state.dirty = true;
   save(state);
-  return iterator(state);
-};
+}
+
+export function addLastDrawingPoing(s: State, p: Point): void {
+  const state = iso.unwrap(s);
+  state.drawing.push(p);
+  state.lines.push(state.drawing);
+  state.drawing = [];
+  state.dirty = true;
+  save(state);
+}
+
+export function willdisplay(s: State, cb: (lines: Array<Point[]>) => boolean) {
+  const state = iso.unwrap(s);
+  if (state.dirty) {
+    const successful = cb([...state.lines, state.drawing]);
+    state.dirty = !successful;
+  }
+}

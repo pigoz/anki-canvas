@@ -1,8 +1,7 @@
 import * as hs from 'hyperscript';
 import * as styles from './styles';
-import { redraw, DEFAULT_CONFIG } from './draw';
-import { load, map, iterator } from './app';
-import { render } from './dom';
+import { render, rendercanvas, DEFAULT_CONFIG } from './render';
+import { map, load } from './app';
 import { CANVAS_SIZE, RESULT_SIZE } from './constants';
 
 const h = hs.context();
@@ -16,7 +15,6 @@ const canvas = h('canvas', {
 
 render('ac-back', canvas);
 
-const scaledstate = map(load(), z => ({ x: z.x * RATIO, y: z.y * RATIO }));
-const scaledconfig = { lineWidth: DEFAULT_CONFIG.lineWidth * RATIO };
-const redrawer = redraw(canvas, scaledconfig)(() => iterator(scaledstate));
-redrawer();
+const state = map(load(), z => ({ x: z.x * RATIO, y: z.y * RATIO }));
+const config = { lineWidth: DEFAULT_CONFIG.lineWidth * RATIO };
+rendercanvas(canvas, state, config);

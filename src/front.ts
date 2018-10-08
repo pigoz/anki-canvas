@@ -1,17 +1,17 @@
+import { HDPI_FACTOR, CANVAS_SIZE } from './constants';
 import * as hs from 'hyperscript';
-import { render } from './dom';
-import * as styles from './styles';
-import { CANVAS_SIZE } from './constants';
-import * as icons from './icons';
-
-import { handleAdd, handleUndo, handleClear, save, empty } from './app';
+import { render, rendercanvas } from './render';
 import {
-  handleStart,
-  handleMove,
-  handleEnd,
-  handleCancel,
-  redraw,
-} from './draw';
+  Point,
+  State,
+  empty,
+  addDrawingPoint,
+  addLastDrawingPoing,
+  undo,
+  clear,
+} from './app';
+import * as styles from './styles';
+import * as icons from './icons';
 
 const h = hs.context();
 
@@ -21,23 +21,66 @@ const canvas = h('canvas', {
   height: CANVAS_SIZE,
 });
 
-const undo = h('button', { style: styles.action });
-undo.innerHTML = icons.undo;
-const clear = h('button', { style: styles.action });
-clear.innerHTML = icons.clear;
+const buttons = {
+  undo: h('button', { style: styles.action }),
+  clear: h('button', { style: styles.action }),
+};
 
-const actions = h('div', { style: styles.actions }, [clear, undo]);
+const actions = h('div', { style: styles.actions }, Object.values(buttons));
 const T = h('div', { style: styles.wrapper }, [canvas, actions]);
 
 render('ac-front', T);
 
 const state = empty();
-save(state); // reset saved state on reinit
 
-undo.addEventListener('click', redraw(canvas)(handleUndo(state)), false);
-clear.addEventListener('click', redraw(canvas)(handleClear(state)), false);
-canvas.addEventListener('touchstart', handleStart(canvas), false);
-canvas.addEventListener('touchend', handleEnd(canvas, handleAdd(state)), false);
-canvas.addEventListener('touchcancel', handleCancel(), false);
-canvas.addEventListener('touchmove', handleMove(canvas), false);
+const hdl = (
+  canvas: HTMLCanvasElement,
+  state: State,
+  action: (state: State, p: Point) => void,
+) => (evt: Event): void => {
+  evt.preventDefault();
+
+  if (!(evt instanceof TouchEvent)) {
+    return;
+  }
+
+  const touches = evt.changedTouches;
+  const touch = touches[0];
+  const point: Point = {
+    x: (touch.pageX - canvas.offsetLeft) * HDPI_FACTOR,
+    y: (touch.pageY - canvas.offsetTop) * HDPI_FACTOR,
+  };
+
+  action(state, point);
+};
+
+canvas.addEventListener(
+  'touchstart',
+  hdl(canvas, state, addDrawingPoint),
+  false,
+);
+
+canvas.addEventListener(
+  'touchmove',
+  hdl(canvas, state, addDrawingPoint),
+  false,
+);
+
+canvas.addEventListener(
+  'touchend',
+  hdl(canvas, state, addLastDrawingPoing),
+  false,
+);
+
+function renderloop() {
+  rendercanvas(canvas, state);
+  requestAnimationFrame(renderloop);
+}
+
+renderloop();
+
 canvas.addEventListener('click', e => e.preventDefault(), false);
+buttons.undo.addEventListener('click', () => undo(state), false);
+buttons.clear.addEventListener('click', () => clear(state), false);
+buttons.undo.innerHTML = icons.undo;
+buttons.clear.innerHTML = icons.clear;
