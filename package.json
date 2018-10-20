@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
-    "@types/jest": "^23.3.3",
+    "@types/jest": "^23.3.5",
     "@types/node": "^10.11.4",
     "chalk": "^2.4.1",
     "jest": "^23.6.0",
@@ -28,8 +28,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "parcel src/*.html",
-    "build": "parcel build src/*.html",
+    "start": "parcel test/*.html",
+    "build": "parcel build src/front.ts src/back.ts",
     "dist": "yarn build && yarn ts-node scripts/dist.ts",
     "release": "rm -r dist && yarn build && yarn ts-node scripts/release.ts"
   },

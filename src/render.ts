@@ -1,7 +1,8 @@
 import { State, willdisplay } from './app';
+import { hex, black } from './colors';
 
 export const DEFAULT_CONFIG = {
-  color: '#000',
+  color: (_index: number, _count: number) => black,
   lineWidth: 18,
 };
 
@@ -25,10 +26,10 @@ export function rendercanvas(
     ctx.lineWidth = config.lineWidth;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.strokeStyle = config.color;
 
     for (let i = 0; i < lines.length; i++) {
       ctx.beginPath();
+      ctx.strokeStyle = hex(config.color(i, lines.length));
       const line = lines[i];
       for (let j = 1; j < line.length; j++) {
         const src = line[j - 1];

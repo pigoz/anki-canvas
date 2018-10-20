@@ -22,6 +22,11 @@ function save(x: S): void {
   db.setItem('state', dump(x));
 }
 
+// use only to load fixtures
+export function saveunsafe(x: unknown): void {
+  db.setItem('state', dump(x));
+}
+
 export function load(): State {
   const item = db.getItem('state');
   return item ? iso.wrap({ ...parse(item), dirty: true }) : empty();
@@ -78,7 +83,9 @@ export function addLastDrawingPoing(s: State, p: Point): void {
 export function willdisplay(s: State, cb: (lines: Array<Point[]>) => boolean) {
   const state = iso.unwrap(s);
   if (state.dirty) {
-    const successful = cb([...state.lines, state.drawing]);
+    const successful = cb(
+      [...state.lines, state.drawing].filter(x => x.length > 0),
+    );
     state.dirty = !successful;
   }
 }
