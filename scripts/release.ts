@@ -6,7 +6,7 @@ function dist(s: string): string {
 }
 
 function release(f: string): string {
-  return path.resolve(path.join(__dirname, `./release/_${f}.js`));
+  return path.resolve(path.join(__dirname, `./anki-canvas/_${f}.js`));
 }
 
 const m: { [k: string]: string } = JSON.parse(

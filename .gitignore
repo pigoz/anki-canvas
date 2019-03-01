@@ -1,8 +1,8 @@
 /node_modules
 /dist
 /.cache
-/scripts/release/*.js
-/scripts/release.zip
+/scripts/anki-canvas/*.js
+/scripts/anki-canvas.zip
 *.log
 *.js.map
 *.js
