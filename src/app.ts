@@ -1,4 +1,5 @@
 import { Newtype, _iso } from './newtype';
+import { defaultStorage, dump, parse } from './storage';
 
 export type Point = {
   readonly x: number;
@@ -9,14 +10,13 @@ type S = {
   lines: Array<Point[]>;
   drawing: Point[];
   dirty: boolean;
+  down: boolean;
 };
 
 export interface State extends Newtype<{ readonly State: unique symbol }, S> {}
 
 const iso = _iso<State>();
-const db = window.localStorage || window.sessionStorage;
-const dump = JSON.stringify;
-const parse = JSON.parse;
+const db = defaultStorage();
 
 function save(x: S): void {
   db.setItem('state', dump(x));
@@ -37,6 +37,7 @@ export function empty(): State {
     lines: [],
     drawing: [],
     dirty: true,
+    down: false,
   };
 
   save(result);
@@ -64,11 +65,24 @@ export function clear(s: State): void {
   save(state);
 }
 
+export type Action = (state: State, p: Point) => void;
+
 export function addDrawingPoint(s: State, p: Point): void {
   const state = iso.unwrap(s);
+
+  if (!state.down) {
+    return;
+  }
+
   state.drawing.push(p);
   state.dirty = true;
   save(state);
+}
+
+export function addFirstDrawingPoint(s: State, p: Point): void {
+  const state = iso.unwrap(s);
+  state.down = true;
+  addDrawingPoint(s, p);
 }
 
 export function addLastDrawingPoing(s: State, p: Point): void {
@@ -77,6 +91,7 @@ export function addLastDrawingPoing(s: State, p: Point): void {
   state.lines.push(state.drawing);
   state.drawing = [];
   state.dirty = true;
+  state.down = false;
   save(state);
 }
 

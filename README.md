@@ -1,6 +1,6 @@
 # anki-canvas
 
-This is a touch based canvas for drawing shapes in [AnkiDroid](https://github.com/ankidroid/Anki-Android).
+This is a touch based canvas for drawing shapes in [AnkiDroid](https://github.com/ankidroid/Anki-Android) and Desktop Anki.
 
 Compared to AnkiDroid's own native whiteboard which is designed to take notes,
 this is meant for **use cases where the the user has to draw a shape as an

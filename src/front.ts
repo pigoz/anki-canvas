@@ -4,12 +4,15 @@ import { renderdom, rendercanvas } from './render';
 import {
   Point,
   State,
+  Action,
   empty,
+  addFirstDrawingPoint,
   addDrawingPoint,
   addLastDrawingPoing,
   undo,
   clear,
 } from './app';
+
 import { black } from './colors';
 import * as styles from './styles';
 import * as icons from './icons';
@@ -34,19 +37,17 @@ renderdom('ac-front', T);
 
 const state = empty();
 
-const handler = (
-  canvas: HTMLCanvasElement,
-  state: State,
-  action: (state: State, p: Point) => void,
-) => (evt: Event): void => {
+const handler = (canvas: HTMLCanvasElement, state: State, action: Action) => (
+  evt: Event,
+): void => {
   evt.preventDefault();
 
-  if (!(evt instanceof TouchEvent)) {
+  if (!(evt instanceof TouchEvent) && !(evt instanceof MouseEvent)) {
     return;
   }
 
-  const touches = evt.changedTouches;
-  const touch = touches[0];
+  const touch = evt instanceof TouchEvent ? evt.changedTouches[0] : evt;
+
   const point: Point = {
     x: (touch.pageX - canvas.offsetLeft) * options.hdpiFactor,
     y: (touch.pageY - canvas.offsetTop) * options.hdpiFactor,
@@ -55,23 +56,18 @@ const handler = (
   action(state, point);
 };
 
-canvas.addEventListener(
-  'touchstart',
-  handler(canvas, state, addDrawingPoint),
-  false,
-);
+const events: Array<[string, Action]> = [
+  ['touchstart', addFirstDrawingPoint],
+  ['touchmove', addDrawingPoint],
+  ['touchend', addLastDrawingPoing],
+  ['mousedown', addFirstDrawingPoint],
+  ['mousemove', addDrawingPoint],
+  ['mouseup', addLastDrawingPoing],
+];
 
-canvas.addEventListener(
-  'touchmove',
-  handler(canvas, state, addDrawingPoint),
-  false,
-);
-
-canvas.addEventListener(
-  'touchend',
-  handler(canvas, state, addLastDrawingPoing),
-  false,
-);
+events.forEach(e => {
+  canvas.addEventListener(e[0], handler(canvas, state, e[1]), false);
+});
 
 function renderloop() {
   rendercanvas(canvas, state, {
