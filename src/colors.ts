@@ -10,7 +10,11 @@ type HSV = {
   readonly v: number;
 };
 
-export const black: RGB = { r: 0, g: 0, b: 0 };
+export const black = (_idx: number, _count: number): RGB => ({
+  r: 0,
+  g: 0,
+  b: 0,
+});
 
 export function hex(c: RGB): string {
   return (

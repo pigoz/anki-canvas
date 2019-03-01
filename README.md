@@ -37,3 +37,19 @@ Anki for desktop and an Ankiweb account. Follow these steps:
   <img src="https://0x0.st/sgTa.png" width="200" title="whiteboard.js">
   <img src="https://0x0.st/sgTB.png" width="200" title="result.js">
 </p>
+
+### Options
+
+You can easily customize some variables picked up by AnkiCanvas. Add the
+following script tag in your card layout before the widget's script tag.
+
+```
+<script>
+window.AnkiCanvasOptions = {
+  frontCanvasSize: 300,
+  frontLineWidth: 18,
+  backCanvasSize: 150,
+  backLineWidth: 9,
+}
+</script>
+```

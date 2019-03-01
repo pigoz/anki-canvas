@@ -1,6 +1,6 @@
 import * as hs from 'hyperscript';
 import { saveunsafe } from '../src/app';
-import { render } from '../src/render';
+import { renderdom } from '../src/render';
 import { ryuu } from './fixtures/ryuu';
 
 const buttons: { [x: string]: unknown } = {
@@ -25,4 +25,4 @@ Object.keys(buttons).forEach(key => {
   fixtures.appendChild(button);
 });
 
-render('ac-fixtures', fixtures);
+renderdom('ac-fixtures', fixtures);

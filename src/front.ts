@@ -1,6 +1,6 @@
-import { HDPI_FACTOR, CANVAS_SIZE } from './constants';
+import { options } from './options';
 import * as hs from 'hyperscript';
-import { render, rendercanvas } from './render';
+import { renderdom, rendercanvas } from './render';
 import {
   Point,
   State,
@@ -10,6 +10,7 @@ import {
   undo,
   clear,
 } from './app';
+import { black } from './colors';
 import * as styles from './styles';
 import * as icons from './icons';
 
@@ -17,8 +18,8 @@ const h = hs.context();
 
 const canvas = h('canvas', {
   style: styles.canvas,
-  width: CANVAS_SIZE,
-  height: CANVAS_SIZE,
+  width: options.frontCanvasSize * options.hdpiFactor,
+  height: options.frontCanvasSize * options.hdpiFactor,
 });
 
 const buttons = {
@@ -29,11 +30,11 @@ const buttons = {
 const actions = h('div', { style: styles.actions }, Object.values(buttons));
 const T = h('div', { style: styles.wrapper }, [canvas, actions]);
 
-render('ac-front', T);
+renderdom('ac-front', T);
 
 const state = empty();
 
-const hdl = (
+const handler = (
   canvas: HTMLCanvasElement,
   state: State,
   action: (state: State, p: Point) => void,
@@ -47,8 +48,8 @@ const hdl = (
   const touches = evt.changedTouches;
   const touch = touches[0];
   const point: Point = {
-    x: (touch.pageX - canvas.offsetLeft) * HDPI_FACTOR,
-    y: (touch.pageY - canvas.offsetTop) * HDPI_FACTOR,
+    x: (touch.pageX - canvas.offsetLeft) * options.hdpiFactor,
+    y: (touch.pageY - canvas.offsetTop) * options.hdpiFactor,
   };
 
   action(state, point);
@@ -56,24 +57,27 @@ const hdl = (
 
 canvas.addEventListener(
   'touchstart',
-  hdl(canvas, state, addDrawingPoint),
+  handler(canvas, state, addDrawingPoint),
   false,
 );
 
 canvas.addEventListener(
   'touchmove',
-  hdl(canvas, state, addDrawingPoint),
+  handler(canvas, state, addDrawingPoint),
   false,
 );
 
 canvas.addEventListener(
   'touchend',
-  hdl(canvas, state, addLastDrawingPoing),
+  handler(canvas, state, addLastDrawingPoing),
   false,
 );
 
 function renderloop() {
-  rendercanvas(canvas, state);
+  rendercanvas(canvas, state, {
+    colorizer: black,
+    lineWidth: options.frontLineWidth,
+  });
   requestAnimationFrame(renderloop);
 }
 

@@ -1,17 +1,19 @@
 import { State, willdisplay } from './app';
-import { hex, black } from './colors';
+import { hex, RGB } from './colors';
 
-export const DEFAULT_CONFIG = {
-  color: (_index: number, _count: number) => black,
+const DEFAULT_CONFIG = {
   lineWidth: 18,
 };
 
-export type DrawConfig = Partial<typeof DEFAULT_CONFIG>;
+type DrawConfig = {
+  colorizer: (_index: number, _count: number) => RGB;
+  lineWidth: number;
+};
 
 export function rendercanvas(
   canvas: HTMLCanvasElement,
   s: State,
-  customConfig: DrawConfig = {},
+  customConfig: DrawConfig,
 ) {
   willdisplay(s, lines => {
     const ctx = canvas.getContext('2d');
@@ -29,7 +31,7 @@ export function rendercanvas(
 
     for (let i = 0; i < lines.length; i++) {
       ctx.beginPath();
-      ctx.strokeStyle = hex(config.color(i, lines.length));
+      ctx.strokeStyle = hex(config.colorizer(i, lines.length));
       const line = lines[i];
       for (let j = 1; j < line.length; j++) {
         const src = line[j - 1];
@@ -44,7 +46,7 @@ export function rendercanvas(
   });
 }
 
-export function render(id: string, t: HTMLElement) {
+export function renderdom(id: string, t: HTMLElement) {
   const el = document.getElementById(id);
   if (el) {
     if (el.firstChild) {

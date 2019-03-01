@@ -1,25 +1,24 @@
 import * as hs from 'hyperscript';
 import * as styles from './styles';
-import { render, rendercanvas, DEFAULT_CONFIG } from './render';
+import { renderdom, rendercanvas } from './render';
 import { map, load } from './app';
 import { spectrum } from './colors';
-import { CANVAS_SIZE, RESULT_SIZE } from './constants';
+import { options } from './options';
 
 const h = hs.context();
-const RATIO = RESULT_SIZE / CANVAS_SIZE;
+const RATIO = options.backCanvasSize / options.frontCanvasSize;
 
 const canvas = h('canvas', {
   style: styles.result,
-  width: RESULT_SIZE,
-  height: RESULT_SIZE,
+  width: options.backCanvasSize * options.hdpiFactor,
+  height: options.backCanvasSize * options.hdpiFactor,
 });
 
-render('ac-back', canvas);
+renderdom('ac-back', canvas);
 
 const state = map(load(), z => ({ x: z.x * RATIO, y: z.y * RATIO }));
-const config = {
-  lineWidth: DEFAULT_CONFIG.lineWidth * RATIO,
-  color: spectrum,
-};
 
-rendercanvas(canvas, state, config);
+rendercanvas(canvas, state, {
+  lineWidth: options.backLineWidth,
+  colorizer: spectrum,
+});
