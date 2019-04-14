@@ -19,6 +19,6 @@ renderdom('ac-back', canvas);
 const state = map(load(), z => ({ x: z.x * RATIO, y: z.y * RATIO }));
 
 rendercanvas(canvas, state, {
-  lineWidth: options.backLineWidth,
+  lineWidth: options.backLineWidth * options.hdpiFactor,
   colorizer: spectrum,
 });

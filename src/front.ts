@@ -72,7 +72,7 @@ events.forEach(e => {
 function renderloop() {
   rendercanvas(canvas, state, {
     colorizer: black,
-    lineWidth: options.frontLineWidth,
+    lineWidth: options.frontLineWidth * options.hdpiFactor,
   });
   requestAnimationFrame(renderloop);
 }

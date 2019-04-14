@@ -1,8 +1,8 @@
 const defaults = {
   frontCanvasSize: 300,
-  frontLineWidth: 18,
+  frontLineWidth: 9,
   backCanvasSize: 150,
-  backLineWidth: 9,
+  backLineWidth: 4,
 };
 
 const hdpiFactor = window.devicePixelRatio ? window.devicePixelRatio : 2;
