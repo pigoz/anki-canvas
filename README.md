@@ -10,7 +10,7 @@ Remembering the Kanji, etc).
 
 ### Download & Install
 
-Download the premade Anki deck from the [Releases page](https://github.com/pigoz/anki-canvas/releases/latest) and double click it.
+Download the premade Anki deck from the [Releases page](https://github.com/pigoz/anki-canvas/releases/latest) and import it into Anki.
 
 ### Screenshots
 
