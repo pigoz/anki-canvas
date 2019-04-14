@@ -31,7 +31,7 @@
     "start": "parcel test/*.html",
     "build": "parcel build src/front.ts src/back.ts",
     "dist": "yarn build && yarn ts-node scripts/dist.ts",
-    "release": "rm -r dist && yarn build && yarn ts-node scripts/release.ts"
+    "release": "rm -r dist && yarn build && cd scripts && ./release.py"
   },
   "jest": {
     "globals": {
