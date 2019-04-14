@@ -16,6 +16,12 @@ export const black = (_idx: number, _count: number): RGB => ({
   b: 0,
 });
 
+export const gray = (l: number): RGB => ({
+  r: l,
+  g: l,
+  b: l,
+});
+
 export function hex(c: RGB): string {
   return (
     '#' +
