@@ -15,8 +15,10 @@ Download the premade Anki deck from the [Releases page](https://github.com/pigoz
 ### Screenshots
 
 <p align="center">
-  <img src="https://0x0.st/sgTa.png" width="200" title="whiteboard.js">
-  <img src="https://0x0.st/sgTB.png" width="200" title="result.js">
+  <img src="https://0x0.st/zmAi.png" width="200" title="front light colorscheme">
+  <img src="https://0x0.st/zmA-.png" width="200" title="back light colorscheme">
+  <img src="https://0x0.st/zmAH.png" width="200" title="front dark colorscheme">
+  <img src="https://0x0.st/zmAX.png" width="200" title="back dark colorscheme">
 </p>
 
 ### Options
