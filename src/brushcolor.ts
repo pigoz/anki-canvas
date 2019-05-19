@@ -1,4 +1,6 @@
-export type RGB = {
+import { ColorScheme } from './options';
+
+type RGB = {
   readonly r: number;
   readonly g: number;
   readonly b: number;
@@ -10,19 +12,9 @@ type HSV = {
   readonly v: number;
 };
 
-export const black = (_idx: number, _count: number): RGB => ({
-  r: 0,
-  g: 0,
-  b: 0,
-});
+type HEX = string;
 
-export const gray = (l: number): RGB => ({
-  r: l,
-  g: l,
-  b: l,
-});
-
-export function hex(c: RGB): string {
+function hex(c: RGB): HEX {
   return (
     '#' +
     [c.r, c.g, c.b]
@@ -77,6 +69,11 @@ function rgb(color: HSV): RGB {
   };
 }
 
-export function spectrum(idx: number, count: number, s = 0.95, v = 0.75): RGB {
-  return rgb({ h: idx / count, s, v });
+export function spectrum(idx: number, count: number, s = 0.95, v = 0.75): HEX {
+  return hex(rgb({ h: idx / count, s, v }));
 }
+
+export const constant = (colorscheme: ColorScheme) => (
+  _idx: number,
+  _count: number,
+): HEX => colorscheme.brush;

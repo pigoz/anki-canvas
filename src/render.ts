@@ -1,17 +1,22 @@
 import { State, willdisplay } from './app';
-import { hex, RGB, gray } from './colors';
+import { ColorScheme } from './options';
 
 const DEFAULT_CONFIG = {
   lineWidth: 18,
 };
 
 type DrawConfig = {
-  colorizer: (_index: number, _count: number) => RGB;
+  colorizer: (_index: number, _count: number) => string;
   lineWidth: number;
+  colorScheme: ColorScheme;
 };
 
-function grid(ctx: CanvasRenderingContext2D, w: number, h: number) {
-  const color = gray(200);
+function rendergrid(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  colorscheme: ColorScheme,
+) {
   const mw = w / 2;
   const mh = h / 2;
 
@@ -27,7 +32,7 @@ function grid(ctx: CanvasRenderingContext2D, w: number, h: number) {
     const x = lines[i];
     ctx.beginPath();
     ctx.setLineDash([w / 80, h / 80]);
-    ctx.strokeStyle = hex(color);
+    ctx.strokeStyle = colorscheme.grid;
     ctx.lineWidth = 1;
     ctx.moveTo(x[0], x[1]);
     ctx.lineTo(x[2], x[3]);
@@ -51,7 +56,7 @@ export function rendercanvas(
     const config = { ...DEFAULT_CONFIG, ...customConfig };
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    grid(ctx, canvas.width, canvas.height);
+    rendergrid(ctx, canvas.width, canvas.height, config.colorScheme);
 
     ctx.save();
     ctx.lineWidth = config.lineWidth;
@@ -60,7 +65,7 @@ export function rendercanvas(
 
     for (let i = 0; i < lines.length; i++) {
       ctx.beginPath();
-      ctx.strokeStyle = hex(config.colorizer(i, lines.length));
+      ctx.strokeStyle = config.colorizer(i, lines.length);
       const line = lines[i];
       for (let j = 1; j < line.length; j++) {
         const src = line[j - 1];

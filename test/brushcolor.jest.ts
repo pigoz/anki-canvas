@@ -1,7 +1,7 @@
-import { hex, spectrum } from '../src/colors';
+import { spectrum } from '../src/brushcolor';
 
 test('basic', () => {
-  const t = (idx: number) => hex(spectrum(idx, 3, 1, 1));
+  const t = (idx: number) => spectrum(idx, 3, 1, 1);
   expect(t(0)).toBe('#ff0000');
   expect(t(1)).toBe('#00ff00');
   expect(t(2)).toBe('#0000ff');
@@ -14,7 +14,7 @@ test('realistic - あ (3 strokes)', () => {
 
   result.forEach((val, idx) => {
     const t = (a: number, b: string) => `${a}-${b}`;
-    expect(t(idx, hex(spectrum(idx, result.length)))).toBe(t(idx, val));
+    expect(t(idx, spectrum(idx, result.length))).toBe(t(idx, val));
   });
 });
 
@@ -37,6 +37,6 @@ test('realistic - 漢 (13 strokes)', () => {
 
   result.forEach((val, idx) => {
     const t = (a: number, b: string) => `${a}-${b}`;
-    expect(t(idx, hex(spectrum(idx, result.length)))).toBe(t(idx, val));
+    expect(t(idx, spectrum(idx, result.length))).toBe(t(idx, val));
   });
 });

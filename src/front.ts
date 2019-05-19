@@ -13,25 +13,32 @@ import {
   clear,
 } from './app';
 
-import { black } from './colors';
+import { constant } from './brushcolor';
 import * as styles from './styles';
 import * as icons from './icons';
 
 const h = hs.context();
 
+const colorScheme = options.colorScheme();
+
 const canvas = h('canvas', {
-  style: styles.canvas,
+  style: styles.canvas(colorScheme),
   width: options.frontCanvasSize * options.hdpiFactor,
   height: options.frontCanvasSize * options.hdpiFactor,
 });
 
 const buttons = {
-  undo: h('button', { style: styles.action }),
-  clear: h('button', { style: styles.action }),
+  undo: h('button', { style: styles.action(colorScheme) }),
+  clear: h('button', { style: styles.action(colorScheme) }),
 };
 
-const actions = h('div', { style: styles.actions }, Object.values(buttons));
-const T = h('div', { style: styles.wrapper }, [canvas, actions]);
+const actions = h(
+  'div',
+  { style: styles.actions(colorScheme) },
+  Object.values(buttons),
+);
+
+const T = h('div', { style: styles.wrapper(colorScheme) }, [canvas, actions]);
 
 renderdom('ac-front', T);
 
@@ -71,8 +78,9 @@ events.forEach(e => {
 
 function renderloop() {
   rendercanvas(canvas, state, {
-    colorizer: black,
+    colorizer: constant(colorScheme),
     lineWidth: options.frontLineWidth * options.hdpiFactor,
+    colorScheme,
   });
   requestAnimationFrame(renderloop);
 }
