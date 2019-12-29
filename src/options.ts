@@ -23,7 +23,7 @@ const defaults = {
       gridBg: '#fff',
       buttonIcon: '#464646',
       buttonBg: '#dcdcdc',
-      frontBrushColorizer: 'constant' as const,
+      frontBrushColorizer: 'none' as const,
       backBrushColorizer: 'spectrum' as const,
     },
     dark: {
@@ -32,7 +32,7 @@ const defaults = {
       gridBg: '#000',
       buttonIcon: '#000',
       buttonBg: '#646464',
-      frontBrushColorizer: 'constant' as const,
+      frontBrushColorizer: 'none' as const,
       backBrushColorizer: 'spectrum' as const,
     },
   },

@@ -30,6 +30,8 @@ window.AnkiCanvasOptions = {
       gridBg: '#fff',
       buttonIcon: '#464646',
       buttonBg: '#dcdcdc',
+      frontBrushColorizer: 'none', // none | spectrum | contrast
+      backBrushColorizer: 'spectrum',
     },
     dark: {
       brush: '#fff',
@@ -37,6 +39,8 @@ window.AnkiCanvasOptions = {
       gridBg: '#000',
       buttonIcon: '#000',
       buttonBg: '#646464',
+      frontBrushColorizer: 'none',
+      backBrushColorizer: 'spectrum',
     },
   },
 }

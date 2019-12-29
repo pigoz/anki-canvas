@@ -78,17 +78,17 @@ export function contrast(idx: number, _count: number, s = 0.95, v = 0.75): HEX {
   return hex(rgb({ h: idx / angle, s, v }));
 }
 
-export const constant = (colorscheme: ColorScheme) => (
+export const none = (colorscheme: ColorScheme) => (
   _idx: number,
   _count: number,
 ): HEX => colorscheme.brush;
 
-export type Colorizers = 'constant' | 'spectrum' | 'contrast';
+export type Colorizers = 'none' | 'spectrum' | 'contrast';
 
 export function getColorizer(colorscheme: ColorScheme, c: Colorizers) {
   switch (c) {
-    case 'constant':
-      return constant(colorscheme);
+    case 'none':
+      return none(colorscheme);
     case 'spectrum':
       return spectrum;
     case 'contrast':
