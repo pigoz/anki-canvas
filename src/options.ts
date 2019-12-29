@@ -1,13 +1,13 @@
+import { Colorizers } from './brushcolor';
+
 export type ColorScheme = {
-  // fg: string;
-  // fgMuted: string;
-  // bg: string;
-  // bgMuted: string;
   brush: string;
   grid: string;
   gridBg: string;
   buttonIcon: string;
   buttonBg: string;
+  frontBrushColorizer: Colorizers;
+  backBrushColorizer: Colorizers;
 };
 
 const defaults = {
@@ -23,6 +23,8 @@ const defaults = {
       gridBg: '#fff',
       buttonIcon: '#464646',
       buttonBg: '#dcdcdc',
+      frontBrushColorizer: 'constant' as const,
+      backBrushColorizer: 'spectrum' as const,
     },
     dark: {
       brush: '#fff',
@@ -30,6 +32,8 @@ const defaults = {
       gridBg: '#000',
       buttonIcon: '#000',
       buttonBg: '#646464',
+      frontBrushColorizer: 'constant' as const,
+      backBrushColorizer: 'spectrum' as const,
     },
   },
 };
@@ -39,11 +43,12 @@ const hdpiFactor = window.devicePixelRatio ? window.devicePixelRatio : 2;
 type O = Partial<typeof defaults>;
 
 function userOption<K extends keyof O>(k: K): O[K] {
-  const userOptions: { [k: string]: unknown } =
+  const userOptions: Record<string, unknown> =
     (window as any).AnkiCanvasOptions || {};
 
-  if (typeof userOptions[k] === typeof defaults[k]) {
-    return userOptions[k];
+  const t = defaults[k];
+  if (typeof userOptions[k] === t) {
+    return userOptions[k] as typeof t;
   }
 
   return undefined;

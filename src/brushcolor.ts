@@ -77,3 +77,13 @@ export const constant = (colorscheme: ColorScheme) => (
   _idx: number,
   _count: number,
 ): HEX => colorscheme.brush;
+
+export type Colorizers = 'constant' | 'spectrum';
+
+export function getColorizer(colorscheme: ColorScheme, c: Colorizers) {
+  switch (c) {
+    case 'constant': return constant(colorscheme);
+    case 'spectrum': return spectrum;
+  }
+  return { constant, spectrum }[c];
+}

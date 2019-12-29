@@ -13,7 +13,7 @@ import {
   clear,
 } from './app';
 
-import { constant } from './brushcolor';
+import { getColorizer } from './brushcolor';
 import * as styles from './styles';
 import * as icons from './icons';
 
@@ -79,7 +79,7 @@ function init() {
 
   function renderloop() {
     rendercanvas(canvas, state, {
-      colorizer: constant(colorScheme),
+      colorizer: getColorizer(colorScheme, colorScheme.frontBrushColorizer),
       lineWidth: options.frontLineWidth * options.hdpiFactor,
       colorScheme,
     });

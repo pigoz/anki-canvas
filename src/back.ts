@@ -2,7 +2,7 @@ import * as hs from 'hyperscript';
 import * as styles from './styles';
 import { renderdom, rendercanvas } from './render';
 import { map, load } from './app';
-import { spectrum } from './brushcolor';
+import { getColorizer } from './brushcolor';
 import { options } from './options';
 
 const h = hs.context();
@@ -21,6 +21,6 @@ const state = map(load(), z => ({ x: z.x * RATIO, y: z.y * RATIO }));
 
 rendercanvas(canvas, state, {
   lineWidth: options.backLineWidth * options.hdpiFactor,
-  colorizer: spectrum,
+  colorizer: getColorizer(colorScheme, colorScheme.backBrushColorizer),
   colorScheme,
 });
