@@ -15,10 +15,10 @@ Download the premade Anki deck from the [Releases page](https://github.com/pigoz
 ### Screenshots
 
 <p align="center">
-  <img src="https://0x0.st/zmAi.png" width="200" title="front light colorscheme">
-  <img src="https://0x0.st/zmA-.png" width="200" title="back light colorscheme">
-  <img src="https://0x0.st/zmAH.png" width="200" title="front dark colorscheme">
-  <img src="https://0x0.st/zmAX.png" width="200" title="back dark colorscheme">
+  <img src="https://user-images.githubusercontent.com/24681/71559422-f5a86380-2a5d-11ea-8bb1-531ea50647ae.png" width="200" title="front light colorscheme">
+  <img src="https://user-images.githubusercontent.com/24681/71559421-f5a86380-2a5d-11ea-98d6-706d4c284402.png" width="200" title="back light colorscheme">
+  <img src="https://user-images.githubusercontent.com/24681/71559420-f50fcd00-2a5d-11ea-8b06-242a3ea231c3.png" width="200" title="front dark colorscheme">
+  <img src="https://user-images.githubusercontent.com/24681/71559418-f50fcd00-2a5d-11ea-972a-9266ece65015.png" width="200" title="back dark colorscheme">
 </p>
 
 ### Options
