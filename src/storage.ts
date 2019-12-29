@@ -3,7 +3,7 @@ interface Storage {
   setItem(k: string, v: string): void;
 }
 
-(window as any).db = (window as any).db || {};
+(window as any).db = (window as any).db ?? {};
 const db: { [k: string]: string } = (window as any).db;
 
 function getItem(k: string): string {
@@ -20,7 +20,7 @@ export function defaultStorage(): Storage {
     return { setItem, getItem };
   }
 
-  return window.localStorage || window.sessionStorage;
+  return window.localStorage ?? window.sessionStorage;
 }
 
 export const dump = JSON.stringify;

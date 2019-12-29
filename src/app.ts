@@ -29,7 +29,7 @@ export function saveunsafe(x: unknown): void {
 
 export function load(): State {
   const item = db.getItem('state');
-  return item ? iso.wrap({ ...parse(item), dirty: true }) : empty();
+  return item !== null ? iso.wrap({ ...parse(item), dirty: true }) : empty();
 }
 
 export function empty(): State {

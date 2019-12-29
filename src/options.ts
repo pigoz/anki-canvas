@@ -38,13 +38,13 @@ const defaults = {
   },
 };
 
-const hdpiFactor = window.devicePixelRatio ? window.devicePixelRatio : 2;
+const hdpiFactor = window.devicePixelRatio ?? 2;
 
 type O = Partial<typeof defaults>;
 
 function userOption<K extends keyof O>(k: K): O[K] {
   const userOptions: Record<string, unknown> =
-    (window as any).AnkiCanvasOptions || {};
+    (window as any).AnkiCanvasOptions ?? {};
 
   const t = defaults[k];
   if (typeof userOptions[k] === t) {
@@ -59,21 +59,21 @@ function isAnkiInNightMode(): boolean {
 }
 
 function colorScheme(): ColorScheme {
-  const c = userOption('colorScheme') || defaults.colorScheme;
+  const c = userOption('colorScheme') ?? defaults.colorScheme;
   const schemes: Record<string, ColorScheme> = Object.assign(
     {},
     defaults.colorSchemes,
     userOption('colorSchemes'),
   );
   const auto = isAnkiInNightMode() ? schemes.dark : schemes.light;
-  return schemes[c] || auto;
+  return schemes[c] ?? auto;
 }
 
 export const options = {
-  frontCanvasSize: userOption('frontCanvasSize') || defaults.frontCanvasSize,
-  frontLineWidth: userOption('frontLineWidth') || defaults.frontLineWidth,
-  backCanvasSize: userOption('backCanvasSize') || defaults.backCanvasSize,
-  backLineWidth: userOption('backLineWidth') || defaults.backLineWidth,
+  frontCanvasSize: userOption('frontCanvasSize') ?? defaults.frontCanvasSize,
+  frontLineWidth: userOption('frontLineWidth') ?? defaults.frontLineWidth,
+  backCanvasSize: userOption('backCanvasSize') ?? defaults.backCanvasSize,
+  backLineWidth: userOption('backLineWidth') ?? defaults.backLineWidth,
   colorScheme,
   hdpiFactor,
 };

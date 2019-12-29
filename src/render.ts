@@ -49,7 +49,7 @@ export function rendercanvas(
   willdisplay(s, lines => {
     const ctx = canvas.getContext('2d');
 
-    if (!ctx) {
+    if (ctx === null) {
       return false;
     }
 
@@ -84,8 +84,8 @@ export function rendercanvas(
 
 export function renderdom(id: string, t: HTMLElement) {
   const el = document.getElementById(id);
-  if (el) {
-    if (el.firstChild) {
+  if (el !== null) {
+    if (el.firstChild !== null) {
       el.removeChild(el.firstChild);
     }
     el.appendChild(t);
