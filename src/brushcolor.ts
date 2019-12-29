@@ -73,17 +73,25 @@ export function spectrum(idx: number, count: number, s = 0.95, v = 0.75): HEX {
   return hex(rgb({ h: idx / count, s, v }));
 }
 
+export function contrast(idx: number, _count: number, s = 0.95, v = 0.75): HEX {
+  const angle = 0.618033988749895; // conjugate of the golden ratio
+  return hex(rgb({ h: idx / angle, s, v }));
+}
+
 export const constant = (colorscheme: ColorScheme) => (
   _idx: number,
   _count: number,
 ): HEX => colorscheme.brush;
 
-export type Colorizers = 'constant' | 'spectrum';
+export type Colorizers = 'constant' | 'spectrum' | 'contrast';
 
 export function getColorizer(colorscheme: ColorScheme, c: Colorizers) {
   switch (c) {
-    case 'constant': return constant(colorscheme);
-    case 'spectrum': return spectrum;
+    case 'constant':
+      return constant(colorscheme);
+    case 'spectrum':
+      return spectrum;
+    case 'contrast':
+      return contrast;
   }
-  return { constant, spectrum }[c];
 }
