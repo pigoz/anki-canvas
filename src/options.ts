@@ -58,10 +58,25 @@ function isAnkiInNightMode(): boolean {
   return document.getElementsByClassName('night_mode').length > 0;
 }
 
+function mergeColorSchemes(
+  ...xs: Array<Record<string, ColorScheme> | undefined>
+) {
+  type T = Record<string, ColorScheme>;
+  return xs.reduce((accu: T, obj: T | undefined) => {
+    const res: T = Object.assign({}, accu);
+    if (obj === undefined) {
+      return res;
+    }
+    Object.keys(obj).forEach((k: string) => {
+      res[k] = Object.assign(res[k] ?? {}, obj[k]);
+    });
+    return res;
+  }, {});
+}
+
 function colorScheme(): ColorScheme {
   const c = userOption('colorScheme') ?? defaults.colorScheme;
-  const schemes: Record<string, ColorScheme> = Object.assign(
-    {},
+  const schemes = mergeColorSchemes(
     defaults.colorSchemes,
     userOption('colorSchemes'),
   );
