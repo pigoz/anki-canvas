@@ -47,7 +47,7 @@ function userOption<K extends keyof O>(k: K): O[K] {
     (window as any).AnkiCanvasOptions ?? {};
 
   const t = defaults[k];
-  if (typeof userOptions[k] === t) {
+  if (typeof userOptions[k] === typeof t) {
     return userOptions[k] as typeof t;
   }
 
