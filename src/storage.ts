@@ -1,12 +1,12 @@
 interface Storage {
-  getItem(k: string): string | null;
+  getItem(k: string): string | null | undefined;
   setItem(k: string, v: string): void;
 }
 
 (window as any).db = (window as any).db ?? {};
 const db: { [k: string]: string } = (window as any).db;
 
-function getItem(k: string): string {
+function getItem(k: string): string | null | undefined {
   return db[k];
 }
 
