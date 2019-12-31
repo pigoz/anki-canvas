@@ -12,6 +12,11 @@ Remembering the Kanji, etc).
 
 Download the premade Anki deck from the [Releases page](https://github.com/pigoz/anki-canvas/releases/latest) and import it into Anki.
 
+⚠ **Note**: you will need to install the following Anki plugins as well
+
+* [Japanese Support (3918629684)](https://ankiweb.net/shared/info/3918629684)
+* [Kanji Colorizer (1964372878)](https://ankiweb.net/shared/info/1964372878)
+
 ### Screenshots
 
 <p align="center">
