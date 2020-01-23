@@ -1,5 +1,5 @@
 import { Newtype, _iso } from './newtype';
-import { defaultStorage, dump, parse } from './storage';
+import { defaultStorage, isStorageSupported, dump, parse } from './storage';
 
 export type Point = {
   readonly x: number;
@@ -19,15 +19,17 @@ const iso = _iso<State>();
 const db = defaultStorage();
 
 function save(x: S): void {
-  db.setItem('state', dump(x));
-}
+  if (!isStorageSupported(db)) {
+    return;
+  }
 
-// use only to load fixtures
-export function saveunsafe(x: unknown): void {
   db.setItem('state', dump(x));
 }
 
 export function load(): State {
+  if (!isStorageSupported(db)) {
+    return empty();
+  }
   const item = db.getItem('state');
   if (item === null || item === undefined) {
     return empty();
