@@ -55,10 +55,11 @@ function init() {
     }
 
     const touch = evt instanceof TouchEvent ? evt.changedTouches[0] : evt;
+    const rect = canvas.getBoundingClientRect();
 
     const point: Point = {
-      x: (touch.pageX - canvas.offsetLeft) * options.hdpiFactor,
-      y: (touch.pageY - canvas.offsetTop) * options.hdpiFactor,
+      x: (touch.pageX - rect.left) * options.hdpiFactor,
+      y: (touch.pageY - rect.top) * options.hdpiFactor,
     };
 
     action(state, point);
