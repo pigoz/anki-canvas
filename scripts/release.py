@@ -2,6 +2,9 @@
 import os
 import genanki
 
+card_id = 1437221308
+deck_id = 1900164519
+
 root = os.path.dirname(os.path.realpath(__file__))
 dist = os.path.abspath(os.path.join(root, '..', 'dist'))
 
@@ -104,7 +107,7 @@ css = '''
 '''.strip()
 
 model = genanki.Model(
-  1437221308,
+  card_id,
   'Japanese Kanji Practice',
   fields=[
     {'name': 'Kanji'},
@@ -126,9 +129,7 @@ model = genanki.Model(
   ],
   css=css)
 
-deck = genanki.Deck(
-  1900164519,
-  '漢字')
+deck = genanki.Deck(deck_id, '漢字')
 
 class KanjiNote(genanki.Note):
   @property
