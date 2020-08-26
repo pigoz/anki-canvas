@@ -1,7 +1,9 @@
 /node_modules
 /dist/*.js
+/dist/*.html
 /.cache
 /scripts/*.apkg
 *.log
 *.js.map
 *.js
+!webpack.config.js
