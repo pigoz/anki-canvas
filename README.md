@@ -10,9 +10,9 @@ Remembering the Kanji, etc).
 
 ### How to install
 
-#### 1. Anki Plugins
+#### 1. Anki plugins
 
-You will need to install the following Anki plugins. From Anki go Tools > Add-ons > Get Add-ons... Then insert the plugin's code.
+You will need to install the following Anki plugins. From Anki go to Tools > Add-ons > Get Add-ons... Then insert the plugin's code.
 
 * [Japanese Support (3918629684)](https://ankiweb.net/shared/info/3918629684)
 * [Kanji Colorizer (1964372878)](https://ankiweb.net/shared/info/1964372878)
