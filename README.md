@@ -8,14 +8,18 @@ answer to a card** (for example: **Kanji/Hanzi drawing practice**,
 Remembering the Kanji, etc).
 
 
-### Download & Install
+### How to install
 
-Download the premade Anki deck from the [Releases page](https://github.com/pigoz/anki-canvas/releases/latest) and import it into Anki.
+#### 1. Anki Plugins
 
-⚠ **Note**: you will need to install the following Anki plugins as well
+You will need to install the following Anki plugins. From Anki go Tools > Add-ons > Get Add-ons... Then insert the plugin's code.
 
 * [Japanese Support (3918629684)](https://ankiweb.net/shared/info/3918629684)
 * [Kanji Colorizer (1964372878)](https://ankiweb.net/shared/info/1964372878)
+
+#### 2. Example deck
+
+Download the premade Anki deck from the [Releases page](https://github.com/pigoz/anki-canvas/releases/latest) and import it into Anki (double clicking the deck should work).
 
 ### Screenshots
 
