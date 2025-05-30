@@ -21,7 +21,7 @@ function removeItem(k: string): void {
 
 export function defaultStorage(): Storage {
   // desktop anki
-  if (navigator.userAgent.includes('QtWebEngine')) {
+  if (navigator.userAgent.includes("QtWebEngine")) {
     return { setItem, getItem, removeItem };
   }
 
@@ -30,7 +30,7 @@ export function defaultStorage(): Storage {
 
 export function isStorageSupported(s: Storage): boolean {
   try {
-    const key = '__anki_canvas_store_check__';
+    const key = "__anki_canvas_store_check__";
     s.setItem(key, key);
     s.removeItem(key);
     return true;

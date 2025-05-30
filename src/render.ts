@@ -1,5 +1,5 @@
-import { State, willdisplay } from './app';
-import { ColorScheme } from './options';
+import { State, willdisplay } from "./app";
+import { ColorScheme } from "./options";
 
 const DEFAULT_CONFIG = {
   lineWidth: 18,
@@ -47,7 +47,7 @@ export function rendercanvas(
   customConfig: DrawConfig,
 ) {
   willdisplay(s, lines => {
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     if (ctx === null) {
       return false;
@@ -60,8 +60,8 @@ export function rendercanvas(
 
     ctx.save();
     ctx.lineWidth = config.lineWidth;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 
     for (let i = 0; i < lines.length; i++) {
       ctx.beginPath();

@@ -16,7 +16,7 @@ function identity<T>(x: T): T {
 
 export const _iso = <S extends Newtype<any, any> = never>(): Iso<
   S,
-  S['_A']
+  S["_A"]
 > => ({
   unwrap: identity,
   wrap: identity,

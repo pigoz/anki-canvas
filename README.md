@@ -7,15 +7,14 @@ this is meant for **use cases where the the user has to draw a shape as the
 answer to a card** (for example: **Kanji/Hanzi drawing practice**,
 Remembering the Kanji, etc).
 
-
 ### How to install
 
 #### 1. Anki plugins
 
 You will need to install the following Anki plugins. From Anki go to Tools > Add-ons > Get Add-ons... Then insert the plugin's code.
 
-* [Japanese Support (3918629684)](https://ankiweb.net/shared/info/3918629684)
-* [Kanji Colorizer (1964372878)](https://ankiweb.net/shared/info/1964372878)
+- [Japanese Support (3918629684)](https://ankiweb.net/shared/info/3918629684)
+- [Kanji Colorizer (1964372878)](https://ankiweb.net/shared/info/1964372878)
 
 #### 2. Example deck
 
@@ -35,7 +34,6 @@ Download the premade Anki deck from the [Releases page](https://github.com/pigoz
 You can easily customize some variables picked up by AnkiCanvas. Open the card
 layout and edit the `AnkiCanvasOptions` JavaScript object in the Front and
 Back templates.
-
 
 The current default options object is the following:
 
@@ -77,3 +75,34 @@ window.AnkiCanvasOptions = {
 }
 </script>
 ```
+
+## Development Setup
+
+This project uses [Bun](https://bun.sh/) as the JavaScript runtime, package manager, and bundler. The front-end development and bundling are handled by [Vite](https://vitejs.dev/), testing is done with [Vitest](https://vitest.dev/), and code linting is performed by [ESLint](https://eslint.org/) (replacing the previous TSLint setup).
+
+### Prerequisites
+
+- Ensure you have [Bun](https://bun.sh/docs/installation) installed.
+
+### Key Commands
+
+- **Install dependencies:**
+  ```bash
+  bun install
+  ```
+- **Run the development server:**
+  ```bash
+  bun run dev
+  ```
+- **Build the project for production:**
+  ```bash
+  bun run build
+  ```
+- **Run tests:**
+  ```bash
+  bun run test
+  ```
+- **Lint the code:**
+  ```bash
+  bun run lint
+  ```

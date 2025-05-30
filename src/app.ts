@@ -1,5 +1,5 @@
-import { Newtype, _iso } from './newtype';
-import { defaultStorage, isStorageSupported, dump, parse } from './storage';
+import { _iso, Newtype } from "./newtype";
+import { defaultStorage, dump, isStorageSupported, parse } from "./storage";
 
 export type Point = {
   readonly x: number;
@@ -23,14 +23,14 @@ function save(x: S): void {
     return;
   }
 
-  db.setItem('state', dump(x));
+  db.setItem("state", dump(x));
 }
 
 export function load(): State {
   if (!isStorageSupported(db)) {
     return empty();
   }
-  const item = db.getItem('state');
+  const item = db.getItem("state");
   if (item === null || item === undefined) {
     return empty();
   }

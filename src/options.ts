@@ -1,4 +1,4 @@
-import { Colorizers } from './brushcolor';
+import { Colorizers } from "./brushcolor";
 
 export type ColorScheme = {
   brush: string;
@@ -15,25 +15,25 @@ const defaults = {
   frontLineWidth: 7,
   backCanvasSize: 150,
   backLineWidth: 3.5,
-  colorScheme: 'auto',
+  colorScheme: "auto",
   colorSchemes: {
     light: {
-      brush: '#000',
-      grid: '#dcdcdc',
-      gridBg: '#fff',
-      buttonIcon: '#464646',
-      buttonBg: '#dcdcdc',
-      frontBrushColorizer: 'none' as const,
-      backBrushColorizer: 'spectrum' as const,
+      brush: "#000",
+      grid: "#dcdcdc",
+      gridBg: "#fff",
+      buttonIcon: "#464646",
+      buttonBg: "#dcdcdc",
+      frontBrushColorizer: "none" as const,
+      backBrushColorizer: "spectrum" as const,
     },
     dark: {
-      brush: '#fff',
-      grid: '#646464',
-      gridBg: '#000',
-      buttonIcon: '#000',
-      buttonBg: '#646464',
-      frontBrushColorizer: 'none' as const,
-      backBrushColorizer: 'spectrum' as const,
+      brush: "#fff",
+      grid: "#646464",
+      gridBg: "#000",
+      buttonIcon: "#000",
+      buttonBg: "#646464",
+      frontBrushColorizer: "none" as const,
+      backBrushColorizer: "spectrum" as const,
     },
   },
 };
@@ -43,8 +43,8 @@ const hdpiFactor = window.devicePixelRatio ?? 2;
 type O = Partial<typeof defaults>;
 
 function userOption<K extends keyof O>(k: K): O[K] {
-  const userOptions: Record<string, unknown> =
-    (window as any).AnkiCanvasOptions ?? {};
+  const userOptions: Record<string, unknown> = (window as any).AnkiCanvasOptions
+    ?? {};
 
   const t = defaults[k];
   if (typeof userOptions[k] === typeof t) {
@@ -55,7 +55,7 @@ function userOption<K extends keyof O>(k: K): O[K] {
 }
 
 function isAnkiInNightMode(): boolean {
-  return document.getElementsByClassName('night_mode').length > 0;
+  return document.getElementsByClassName("night_mode").length > 0;
 }
 
 function mergeColorSchemes(
@@ -75,20 +75,20 @@ function mergeColorSchemes(
 }
 
 function colorScheme(): ColorScheme {
-  const c = userOption('colorScheme') ?? defaults.colorScheme;
+  const c = userOption("colorScheme") ?? defaults.colorScheme;
   const schemes = mergeColorSchemes(
     defaults.colorSchemes,
-    userOption('colorSchemes'),
+    userOption("colorSchemes"),
   );
   const auto = isAnkiInNightMode() ? schemes.dark : schemes.light;
   return schemes[c] ?? auto;
 }
 
 export const options = {
-  frontCanvasSize: userOption('frontCanvasSize') ?? defaults.frontCanvasSize,
-  frontLineWidth: userOption('frontLineWidth') ?? defaults.frontLineWidth,
-  backCanvasSize: userOption('backCanvasSize') ?? defaults.backCanvasSize,
-  backLineWidth: userOption('backLineWidth') ?? defaults.backLineWidth,
+  frontCanvasSize: userOption("frontCanvasSize") ?? defaults.frontCanvasSize,
+  frontLineWidth: userOption("frontLineWidth") ?? defaults.frontLineWidth,
+  backCanvasSize: userOption("backCanvasSize") ?? defaults.backCanvasSize,
+  backLineWidth: userOption("backLineWidth") ?? defaults.backLineWidth,
   colorScheme,
   hdpiFactor,
 };

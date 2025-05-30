@@ -1,51 +1,52 @@
-import { options } from './options';
-import * as hs from 'hyperscript';
-import { renderdom, rendercanvas } from './render';
+import * as hs from "hyperscript";
 import {
+  Action,
+  addDrawingPoint,
+  addFirstDrawingPoint,
+  addLastDrawingPoing,
+  clear,
+  empty,
   Point,
   State,
-  Action,
-  empty,
-  addFirstDrawingPoint,
-  addDrawingPoint,
-  addLastDrawingPoing,
   undo,
-  clear,
-} from './app';
+} from "./app";
+import { options } from "./options";
+import { rendercanvas, renderdom } from "./render";
 
-import { getColorizer } from './brushcolor';
-import * as styles from './styles';
-import * as icons from './icons';
+import { getColorizer } from "./brushcolor";
+import * as icons from "./icons";
+import * as styles from "./styles";
 
 function init() {
   const h = hs.context();
 
   const colorScheme = options.colorScheme();
 
-  const canvas = h('canvas', {
+  const canvas = h("canvas", {
     style: styles.canvas(colorScheme),
     width: options.frontCanvasSize * options.hdpiFactor,
     height: options.frontCanvasSize * options.hdpiFactor,
   });
 
   const buttons = {
-    undo: h('button', { style: styles.action(colorScheme) }),
-    clear: h('button', { style: styles.action(colorScheme) }),
+    undo: h("button", { style: styles.action(colorScheme) }),
+    clear: h("button", { style: styles.action(colorScheme) }),
   };
 
   const actions = h(
-    'div',
+    "div",
     { style: styles.actions(colorScheme) },
     Object.values(buttons),
   );
 
-  const T = h('div', { style: styles.wrapper(colorScheme) }, [canvas, actions]);
+  const T = h("div", { style: styles.wrapper(colorScheme) }, [canvas, actions]);
 
-  renderdom('ac-front', T);
+  renderdom("ac-front", T);
 
   const state = empty();
 
-  const handler = (canvas: HTMLCanvasElement, state: State, action: Action) => (
+  const handler = (canvas: HTMLCanvasElement, state: State, action: Action) =>
+  (
     evt: Event,
   ): void => {
     evt.preventDefault();
@@ -66,12 +67,12 @@ function init() {
   };
 
   const events: Array<[string, Action]> = [
-    ['touchstart', addFirstDrawingPoint],
-    ['touchmove', addDrawingPoint],
-    ['touchend', addLastDrawingPoing],
-    ['mousedown', addFirstDrawingPoint],
-    ['mousemove', addDrawingPoint],
-    ['mouseup', addLastDrawingPoing],
+    ["touchstart", addFirstDrawingPoint],
+    ["touchmove", addDrawingPoint],
+    ["touchend", addLastDrawingPoing],
+    ["mousedown", addFirstDrawingPoint],
+    ["mousemove", addDrawingPoint],
+    ["mouseup", addLastDrawingPoing],
   ];
 
   events.forEach(e => {
@@ -89,9 +90,9 @@ function init() {
 
   renderloop();
 
-  canvas.addEventListener('click', e => e.preventDefault(), false);
-  buttons.undo.addEventListener('click', () => undo(state), false);
-  buttons.clear.addEventListener('click', () => clear(state), false);
+  canvas.addEventListener("click", e => e.preventDefault(), false);
+  buttons.undo.addEventListener("click", () => undo(state), false);
+  buttons.clear.addEventListener("click", () => clear(state), false);
   buttons.undo.innerHTML = icons.undo;
   buttons.clear.innerHTML = icons.clear;
 }

@@ -1,4 +1,4 @@
-import { ColorScheme } from './options';
+import { ColorScheme } from "./options";
 
 type RGB = {
   readonly r: number;
@@ -16,13 +16,13 @@ type HEX = string;
 
 function hex(c: RGB): HEX {
   return (
-    '#' +
-    [c.r, c.g, c.b]
+    "#"
+    + [c.r, c.g, c.b]
       .map(x => {
         const h = x.toString(16);
-        return h.length === 1 ? '0' + h : h;
+        return h.length === 1 ? "0" + h : h;
       })
-      .join('')
+      .join("")
   );
 }
 
@@ -78,20 +78,21 @@ export function contrast(idx: number, _count: number, s = 0.95, v = 0.75): HEX {
   return hex(rgb({ h: idx / angle, s, v }));
 }
 
-export const none = (colorscheme: ColorScheme) => (
+export const none = (colorscheme: ColorScheme) =>
+(
   _idx: number,
   _count: number,
 ): HEX => colorscheme.brush;
 
-export type Colorizers = 'none' | 'spectrum' | 'contrast';
+export type Colorizers = "none" | "spectrum" | "contrast";
 
 export function getColorizer(colorscheme: ColorScheme, c: Colorizers) {
   switch (c) {
-    case 'none':
+    case "none":
       return none(colorscheme);
-    case 'spectrum':
+    case "spectrum":
       return spectrum;
-    case 'contrast':
+    case "contrast":
       return contrast;
   }
 }
