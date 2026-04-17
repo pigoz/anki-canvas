@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest';
 import { spectrum, contrast } from '../src/brushcolor';
 
 // test fixtures from

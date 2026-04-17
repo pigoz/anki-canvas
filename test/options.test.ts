@@ -1,3 +1,4 @@
+import { test, expect, beforeEach } from 'vitest';
 import { options } from '../src/options';
 
 function setopt(o: unknown) {

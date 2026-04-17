@@ -3,7 +3,7 @@
 /dist/*.html
 /.cache
 /scripts/*.apkg
+__pycache__/
 *.log
 *.js.map
 *.js
-!webpack.config.js
