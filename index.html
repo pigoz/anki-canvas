@@ -5,9 +5,10 @@
     <title>anki-canvas</title>
     <style>
       body { padding: 0; margin: 0; }
-      nav { background: black; padding: 1rem; }
-      nav a { color: white; margin-right: 1rem; }
+      nav { background: black; padding: 1rem; display: flex; gap: 1rem; align-items: center; }
+      nav a { color: white; }
       nav a.active { text-decoration: underline; }
+      nav .sep { color: #666; }
       section { padding: 1rem; }
       .card {
         font-family: arial;
@@ -22,20 +23,43 @@
   </head>
   <body>
     <nav>
-      <a href="?view=all">All</a>
-      <a href="?view=front">Front</a>
-      <a href="?view=back">Back</a>
+      <a data-view="all">All</a>
+      <a data-view="front">Front</a>
+      <a data-view="back">Back</a>
+      <span class="sep">|</span>
+      <a data-multi="0">Single</a>
+      <a data-multi="1">Multi</a>
     </nav>
     <section class="card">
+      <div id="ac-kanji" style="display: none;">漢字</div>
       <div id="ac-front"></div>
       <div id="ac-back"></div>
     </section>
+    <script>
+      // sync: must set before module bundle evaluates options.ts
+      window.AnkiCanvasOptions = {
+        multiCanvasEnabled:
+          new URLSearchParams(location.search).get('multi') === '1',
+      };
+    </script>
     <script type="module">
-      const view = new URLSearchParams(location.search).get('view') ?? 'all';
+      const params = new URLSearchParams(location.search);
+      const view = params.get('view') ?? 'all';
+      const multi = params.get('multi') === '1';
+
       document.body.dataset.view = view;
-      for (const a of document.querySelectorAll('nav a')) {
-        const href = new URL(a.href, location.href);
-        if (href.searchParams.get('view') === view) a.classList.add('active');
+
+      for (const a of document.querySelectorAll('nav a[data-view]')) {
+        const next = new URLSearchParams(params);
+        next.set('view', a.dataset.view);
+        a.href = `?${next}`;
+        if (a.dataset.view === view) a.classList.add('active');
+      }
+      for (const a of document.querySelectorAll('nav a[data-multi]')) {
+        const next = new URLSearchParams(params);
+        next.set('multi', a.dataset.multi);
+        a.href = `?${next}`;
+        if ((a.dataset.multi === '1') === multi) a.classList.add('active');
       }
     </script>
     <script type="module" src="./src/front.ts"></script>

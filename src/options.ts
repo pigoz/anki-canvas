@@ -15,6 +15,9 @@ const defaults = {
   frontLineWidth: 7,
   backCanvasSize: 150,
   backLineWidth: 3.5,
+  multiCanvasEnabled: false,
+  multiCanvasFieldDomSelector: '#ac-kanji',
+  multiCanvasOnlyCJK: true,
   colorScheme: 'auto',
   colorSchemes: {
     light: {
@@ -89,6 +92,13 @@ export const options = {
   frontLineWidth: userOption('frontLineWidth') ?? defaults.frontLineWidth,
   backCanvasSize: userOption('backCanvasSize') ?? defaults.backCanvasSize,
   backLineWidth: userOption('backLineWidth') ?? defaults.backLineWidth,
+  multiCanvasEnabled:
+    userOption('multiCanvasEnabled') ?? defaults.multiCanvasEnabled,
+  multiCanvasFieldDomSelector:
+    userOption('multiCanvasFieldDomSelector') ??
+    defaults.multiCanvasFieldDomSelector,
+  multiCanvasOnlyCJK:
+    userOption('multiCanvasOnlyCJK') ?? defaults.multiCanvasOnlyCJK,
   colorScheme,
   hdpiFactor,
 };

@@ -7,6 +7,7 @@ export type Point = {
 };
 
 type S = {
+  key: string;
   lines: Array<Point[]>;
   drawing: Point[];
   dirty: boolean;
@@ -23,22 +24,23 @@ function save(x: S): void {
     return;
   }
 
-  db.setItem('state', dump(x));
+  db.setItem(x.key, dump(x));
 }
 
-export function load(): State {
+export function load(key: string): State {
   if (!isStorageSupported(db)) {
-    return empty();
+    return empty(key);
   }
-  const item = db.getItem('state');
+  const item = db.getItem(key);
   if (item === null || item === undefined) {
-    return empty();
+    return empty(key);
   }
-  return iso.wrap({ ...parse(item), dirty: true });
+  return iso.wrap({ ...parse(item), key, dirty: true });
 }
 
-export function empty(): State {
+export function empty(key: string): State {
   const result: S = {
+    key,
     lines: [],
     drawing: [],
     dirty: true,

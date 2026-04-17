@@ -12,13 +12,13 @@ import {
 } from './app';
 import { getColorizer } from './brushcolor';
 import * as icons from './icons';
+import { canvasKeys } from './kanji';
 import { options } from './options';
 import { rendercanvas, renderdom } from './render';
 import * as styles from './styles';
 
-function init() {
+function buildCanvas(state: State): HTMLElement {
   const h = hs.context();
-
   const colorScheme = options.colorScheme();
 
   const canvas = h('canvas', {
@@ -38,14 +38,13 @@ function init() {
     Object.values(buttons),
   );
 
-  const T = h('div', { style: styles.wrapper(colorScheme) }, [canvas, actions]);
-
-  renderdom('ac-front', T);
-
-  const state = empty();
+  const wrapper = h('div', { style: styles.wrapper(colorScheme) }, [
+    canvas,
+    actions,
+  ]);
 
   const handler =
-    (canvas: HTMLCanvasElement, state: State, action: Action) =>
+    (action: Action) =>
     (evt: Event): void => {
       evt.preventDefault();
 
@@ -74,7 +73,7 @@ function init() {
   ];
 
   events.forEach(e => {
-    canvas.addEventListener(e[0], handler(canvas, state, e[1]), false);
+    canvas.addEventListener(e[0], handler(e[1]), false);
   });
 
   function renderloop() {
@@ -93,6 +92,13 @@ function init() {
   buttons.clear.addEventListener('click', () => clear(state), false);
   buttons.undo.innerHTML = icons.undo;
   buttons.clear.innerHTML = icons.clear;
+
+  return wrapper;
+}
+
+function init() {
+  const wrappers = canvasKeys().map(k => buildCanvas(empty(k)));
+  renderdom('ac-front', wrappers);
 }
 
 requestAnimationFrame(init);

@@ -82,12 +82,12 @@ export function rendercanvas(
   });
 }
 
-export function renderdom(id: string, t: HTMLElement) {
+export function renderdom(id: string, t: HTMLElement | HTMLElement[]) {
   const el = document.getElementById(id);
-  if (el !== null) {
-    if (el.firstChild !== null) {
-      el.removeChild(el.firstChild);
-    }
-    el.appendChild(t);
+  if (el === null) return;
+  while (el.firstChild !== null) {
+    el.removeChild(el.firstChild);
   }
+  const children = Array.isArray(t) ? t : [t];
+  for (const c of children) el.appendChild(c);
 }
