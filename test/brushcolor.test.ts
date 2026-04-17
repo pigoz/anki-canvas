@@ -1,4 +1,4 @@
-import { expect, test } from 'vitest';
+import { expect, test } from 'bun:test';
 import { contrast, spectrum } from '../src/brushcolor';
 
 // test fixtures from

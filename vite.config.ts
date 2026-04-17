@@ -32,8 +32,4 @@ export default defineConfig(({ command }) => ({
           },
         },
   },
-  test: {
-    environment: 'jsdom',
-    include: ['test/**/*.test.ts'],
-  },
 }));
