@@ -25,6 +25,7 @@
     "build": "ENTRY=front vite build && ENTRY=back vite build",
     "dist": "bun run build && bun scripts/dist.ts",
     "release": "rm -rf dist && bun run build && cd scripts && uv run release.py",
+    "ghrelease": "uv run scripts/ghrelease.py",
     "lint": "biome check .",
     "format": "biome format --write ."
   }
