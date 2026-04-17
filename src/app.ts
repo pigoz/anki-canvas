@@ -1,5 +1,5 @@
-import { Newtype, _iso } from './newtype';
-import { defaultStorage, isStorageSupported, dump, parse } from './storage';
+import { _iso, type Newtype } from './newtype';
+import { defaultStorage, dump, isStorageSupported, parse } from './storage';
 
 export type Point = {
   readonly x: number;

@@ -1,9 +1,9 @@
 import * as hs from 'hyperscript';
-import * as styles from './styles';
-import { renderdom, rendercanvas } from './render';
-import { map, load } from './app';
+import { load, map } from './app';
 import { getColorizer } from './brushcolor';
 import { options } from './options';
+import { rendercanvas, renderdom } from './render';
+import * as styles from './styles';
 
 const h = hs.context();
 const RATIO = options.backCanvasSize / options.frontCanvasSize;

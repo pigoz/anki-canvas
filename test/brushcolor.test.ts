@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest';
-import { spectrum, contrast } from '../src/brushcolor';
+import { expect, test } from 'vitest';
+import { contrast, spectrum } from '../src/brushcolor';
 
 // test fixtures from
 // https://github.com/cayennes/kanji-colorize

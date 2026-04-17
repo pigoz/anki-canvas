@@ -1,4 +1,4 @@
-import { ColorScheme } from './options';
+import type { ColorScheme } from './options';
 
 type RGB = {
   readonly r: number;
@@ -78,10 +78,10 @@ export function contrast(idx: number, _count: number, s = 0.95, v = 0.75): HEX {
   return hex(rgb({ h: idx / angle, s, v }));
 }
 
-export const none = (colorscheme: ColorScheme) => (
-  _idx: number,
-  _count: number,
-): HEX => colorscheme.brush;
+export const none =
+  (colorscheme: ColorScheme) =>
+  (_idx: number, _count: number): HEX =>
+    colorscheme.brush;
 
 export type Colorizers = 'none' | 'spectrum' | 'contrast';
 

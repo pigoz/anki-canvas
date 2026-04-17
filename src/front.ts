@@ -1,21 +1,20 @@
-import { options } from './options';
 import * as hs from 'hyperscript';
-import { renderdom, rendercanvas } from './render';
 import {
-  Point,
-  State,
-  Action,
-  empty,
-  addFirstDrawingPoint,
+  type Action,
   addDrawingPoint,
+  addFirstDrawingPoint,
   addLastDrawingPoing,
-  undo,
   clear,
+  empty,
+  type Point,
+  type State,
+  undo,
 } from './app';
-
 import { getColorizer } from './brushcolor';
-import * as styles from './styles';
 import * as icons from './icons';
+import { options } from './options';
+import { rendercanvas, renderdom } from './render';
+import * as styles from './styles';
 
 function init() {
   const h = hs.context();
@@ -45,25 +44,25 @@ function init() {
 
   const state = empty();
 
-  const handler = (canvas: HTMLCanvasElement, state: State, action: Action) => (
-    evt: Event,
-  ): void => {
-    evt.preventDefault();
+  const handler =
+    (canvas: HTMLCanvasElement, state: State, action: Action) =>
+    (evt: Event): void => {
+      evt.preventDefault();
 
-    if (!(evt instanceof TouchEvent) && !(evt instanceof MouseEvent)) {
-      return;
-    }
+      if (!(evt instanceof TouchEvent) && !(evt instanceof MouseEvent)) {
+        return;
+      }
 
-    const touch = evt instanceof TouchEvent ? evt.changedTouches[0] : evt;
-    const rect = canvas.getBoundingClientRect();
+      const touch = evt instanceof TouchEvent ? evt.changedTouches[0] : evt;
+      const rect = canvas.getBoundingClientRect();
 
-    const point: Point = {
-      x: (touch.pageX - rect.left) * options.hdpiFactor,
-      y: (touch.pageY - rect.top) * options.hdpiFactor,
+      const point: Point = {
+        x: (touch.pageX - rect.left) * options.hdpiFactor,
+        y: (touch.pageY - rect.top) * options.hdpiFactor,
+      };
+
+      action(state, point);
     };
-
-    action(state, point);
-  };
 
   const events: Array<[string, Action]> = [
     ['touchstart', addFirstDrawingPoint],

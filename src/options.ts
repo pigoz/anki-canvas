@@ -1,4 +1,4 @@
-import { Colorizers } from './brushcolor';
+import type { Colorizers } from './brushcolor';
 
 export type ColorScheme = {
   brush: string;

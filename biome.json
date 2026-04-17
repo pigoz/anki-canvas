@@ -13,7 +13,8 @@
     "formatter": {
       "quoteStyle": "single",
       "trailingCommas": "all",
-      "semicolons": "always"
+      "semicolons": "always",
+      "arrowParentheses": "asNeeded"
     }
   },
   "linter": {

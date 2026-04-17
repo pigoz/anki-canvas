@@ -1,4 +1,4 @@
-import { options, ColorScheme } from './options';
+import { type ColorScheme, options } from './options';
 
 export const canvas = (scheme: ColorScheme) => ({
   height: `${options.frontCanvasSize}px`,

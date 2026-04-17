@@ -1,5 +1,5 @@
-import { State, willdisplay } from './app';
-import { ColorScheme } from './options';
+import { type State, willdisplay } from './app';
+import type { ColorScheme } from './options';
 
 const DEFAULT_CONFIG = {
   lineWidth: 18,
