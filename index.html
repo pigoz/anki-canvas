@@ -37,8 +37,8 @@
         const href = new URL(a.href, location.href);
         if (href.searchParams.get('view') === view) a.classList.add('active');
       }
-      if (view === 'front' || view === 'all') await import('/src/front.ts');
-      if (view === 'back'  || view === 'all') await import('/src/back.ts');
     </script>
+    <script type="module" src="./src/front.ts"></script>
+    <script type="module" src="./src/back.ts"></script>
   </body>
 </html>

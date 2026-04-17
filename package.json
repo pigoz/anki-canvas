@@ -20,10 +20,11 @@
   },
   "scripts": {
     "test": "bun test",
-    "start": "vite",
-    "build": "ENTRY=front vite build && ENTRY=back vite build",
+    "start": "bun index.html",
+    "build": "bun build --target=browser --minify --outdir=dist --entry-naming='[name].js' src/front.ts src/back.ts",
+    "build:release": "ENTRY=front vite build && ENTRY=back vite build",
     "dist": "bun run build && bun scripts/dist.ts",
-    "release": "rm -rf dist && bun run build && cd scripts && uv run release.py",
+    "release": "rm -rf dist && bun run build:release && cd scripts && uv run release.py",
     "ghrelease": "uv run scripts/ghrelease.py",
     "lint": "biome check .",
     "format": "biome format --write ."
