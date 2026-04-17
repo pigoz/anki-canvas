@@ -47,19 +47,6 @@ window.AnkiCanvasOptions = {
   backCanvasSize: 150,
   backLineWidth: 3.5,
 
-  // Multi-canvas mode: renders one canvas per character in a card field, for
-  // practicing compound words (e.g. 漢字 → two canvases). Disabled by default.
-  // When enabled, the character count is read from the DOM element matched by
-  // `multiCanvasFieldDomSelector`. Both front and back templates must
-  // contain this element (typically `<div id="ac-kanji">{{Kanji}}</div>`) so
-  // the two sides agree on the canvas count and ordering.
-  multiCanvasEnabled: false,
-  multiCanvasFieldDomSelector: '#ac-kanji',
-  // When true, only CJK Unified Ideographs (kanji/hanzi/hanja) generate a
-  // canvas — kana, punctuation, and whitespace are ignored. Set to false to
-  // get a canvas for every non-whitespace character.
-  multiCanvasOnlyCJK: true,
-
   // 'auto' is a special value that will automatically select either 'light' or
   // 'dark' depending on Anki's "Night Mode" status. If you wish to force a
   // colorScheme, you can pass it's name from the colorSchemes settings below.
@@ -87,6 +74,19 @@ window.AnkiCanvasOptions = {
       backBrushColorizer: 'spectrum',
     },
   },
+
+  // Multi-canvas mode: renders one canvas per character in a card field, for
+  // practicing compound words (e.g. 漢字 → two canvases). Disabled by default.
+  // When enabled, the character count is read from the DOM element matched by
+  // `multiCanvasFieldDomSelector`. Both front and back templates must
+  // contain this element (typically `<div id="ac-kanji">{{Kanji}}</div>`) so
+  // the two sides agree on the canvas count and ordering.
+  multiCanvasEnabled: false,
+  multiCanvasFieldDomSelector: '#ac-kanji',
+  // When true, only CJK Unified Ideographs (kanji/hanzi/hanja) generate a
+  // canvas — kana, punctuation, and whitespace are ignored. Set to false to
+  // get a canvas for every non-whitespace character.
+  multiCanvasOnlyCJK: true,
 }
 </script>
 ```
